@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
 
+const activeTab = ref('overview');
+
 const menuItems = [
   {id: 'overview', label: 'Vue d\'ensemble', icon: 'lucide:trending-up'},
   {id: 'classes', label: 'Classes', icon: 'lucide:users'},

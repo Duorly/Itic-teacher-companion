@@ -20,11 +20,11 @@
           </div>
           <div class="flex items-center gap-3">
             <UColorModeSwitch/>
-            <button class="p-2 flex items-center hover:bg-white rounded-lg transition-all border border-slate-200">
-              <Icon name="lucide:search" class="w-5 h-5 text-slate-600"/>
+            <button class="p-2 flex items-center hover:bg-white dark:hover:bg-slate-800 rounded-lg transition-all border border-slate-200 dark:border-slate-700">
+              <Icon name="lucide:search" class="w-5 h-5 text-slate-600 dark:text-slate-300"/>
             </button>
-            <button class="p-2 flex items-center hover:bg-white rounded-lg transition-all border border-slate-200">
-              <Icon name="lucide:filter" class="w-5 h-5 text-slate-600"/>
+            <button class="p-2 flex items-center hover:bg-white dark:hover:bg-slate-800 rounded-lg transition-all border border-slate-200 dark:border-slate-700">
+              <Icon name="lucide:filter" class="w-5 h-5 text-slate-600 dark:text-slate-300"/>
             </button>
             <button
                 class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all">
@@ -47,7 +47,7 @@
             class="col-span-2 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
           <div class="flex items-center justify-between mb-6">
             <h3 class="text-xl font-bold text-slate-900 dark:text-white">Mes Classes</h3>
-            <button class="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1">
+            <button class="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1 cursor-pointer">
               Voir tout
               <Icon name="lucide:chevron-right" class="w-4 h-4"/>
             </button>
@@ -160,10 +160,6 @@
 </template>
 
 <script setup>
-const activeTab = ref('overview');
-
-
-
 const stats = [
   {label: 'Classes', value: '8', icon: 'lucide:users', change: '+2', color: 'bg-blue-500'},
   {label: 'Devoirs', value: '24', icon: 'lucide:file-text', change: '+5', color: 'bg-purple-500'},
