@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+/*
+    Logo colors
+    d23a8c,a7d7ee,3c519d,1387c9,fad6e7,b63e8f,276bb1,7f4494
+*/
+
+@theme static {
+    /* Couleur Rose vif - #d23a8c */
+    --color-pink-50: #fef5f9;
+    --color-pink-100: #fce9f3;
+    --color-pink-200: #fad6e7;
+    --color-pink-300: #f7b3d4;
+    --color-pink-400: #f280b8;
+    --color-pink-500: #e84c9a;
+    --color-pink-600: #d23a8c;
+    --color-pink-700: #b63e8f;
+    --color-pink-800: #961e6d;
+    --color-pink-900: #7d1d5c;
+    --color-pink-950: #4c0b35;
+
+    /* Couleur Bleu clair - #a7d7ee */
+    --color-sky-50: #f0f9fd;
+    --color-sky-100: #e0f2fb;
+    --color-sky-200: #bae5f6;
+    --color-sky-300: #a7d7ee;
+    --color-sky-400: #5dbce4;
+    --color-sky-500: #359fd0;
+    --color-sky-600: #2480b0;
+    --color-sky-700: #1f678f;
+    --color-sky-800: #1f5776;
+    --color-sky-900: #1e4962;
+    --color-sky-950: #142f41;
+
+    /* Couleur Bleu foncé - #3c519d */
+    --color-indigo-50: #f2f5fb;
+    --color-indigo-100: #e7edf8;
+    --color-indigo-200: #d3dcf2;
+    --color-indigo-300: #b8c5e8;
+    --color-indigo-400: #9aa8dc;
+    --color-indigo-500: #7f8bcf;
+    --color-indigo-600: #6870be;
+    --color-indigo-700: #5a5faa;
+    --color-indigo-800: #4c508a;
+    --color-indigo-900: #3c519d;
+    --color-indigo-950: #252d5c;
+
+    /* Couleur Bleu moyen - #1387c9 */
+    --color-blue-50: #f0f8fd;
+    --color-blue-100: #e0f0fb;
+    --color-blue-200: #bae1f7;
+    --color-blue-300: #7dcbf1;
+    --color-blue-400: #38b2e7;
+    --color-blue-500: #1397d6;
+    --color-blue-600: #1387c9;
+    --color-blue-700: #0b6096;
+    --color-blue-800: #0d517c;
+    --color-blue-900: #104467;
+    --color-blue-950: #0b2b45;
+
+    /* Couleur Violet - #7f4494 */
+    --color-purple-50: #faf5fc;
+    --color-purple-100: #f4e9f8;
+    --color-purple-200: #ead5f2;
+    --color-purple-300: #dab5e7;
+    --color-purple-400: #c389d7;
+    --color-purple-500: #a962c3;
+    --color-purple-600: #8f47a6;
+    --color-purple-700: #7f4494;
+    --color-purple-800: #643773;
+    --color-purple-900: #542f5f;
+    --color-purple-950: #36163d;
+
+    /* Couleur Bleu profond - #276bb1 */
+    --color-cyan-50: #f2f7fb;
+    --color-cyan-100: #e7f0f8;
+    --color-cyan-200: #d3e2f2;
+    --color-cyan-300: #b8cfe8;
+    --color-cyan-400: #9ab6dc;
+    --color-cyan-500: #8099cf;
+    --color-cyan-600: #6a7dc0;
+    --color-cyan-700: #5a6aae;
+    --color-cyan-800: #4d588e;
+    --color-cyan-900: #414a72;
+    --color-cyan-950: #276bb1;
+}
