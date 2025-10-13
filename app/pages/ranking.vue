@@ -104,7 +104,7 @@
         <!-- 1ère Place -->
         <div class="order-2">
           <div class="border-2 border-yellow-500/70 bg-gradient-to-b from-yellow-900/60 to-black/60 backdrop-blur-sm rounded-lg p-6 hover:scale-105 transition-all relative shadow-2xl shadow-yellow-500/30">
-            <div class="absolute -top-30px left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black px-6 py-2 rounded-full text-sm font-bold border-4 border-yellow-400 animate-pulse shadow-lg shadow-yellow-500/50 flex items-center gap-2">
+            <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black px-6 py-2 rounded-full text-sm font-bold border-4 border-yellow-400 animate-pulse shadow-lg shadow-yellow-500/50 flex items-center gap-2">
               <span>👑</span>
               <span>RANK #1</span>
               <span>👑</span>
