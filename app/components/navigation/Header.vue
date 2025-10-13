@@ -27,7 +27,7 @@
         <button
             class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all">
           <Icon name="lucide:plus" class="w-5 h-5"/>
-          <span class="font-medium">Nouveau devoir</span>
+          <span class="font-medium">Nouveau challenge</span>
         </button>
       </div>
     </div>
