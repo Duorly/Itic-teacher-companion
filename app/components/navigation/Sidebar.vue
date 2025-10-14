@@ -1,14 +1,11 @@
 <script setup lang="ts">
-const colorMode = useColorMode()
-
-const activeTab = ref('overview');
 
 const menuItems = [
-  {id: 'overview', label: 'Vue d\'ensemble', icon: 'lucide:trending-up'},
-  {id: 'classes', label: 'Classes', icon: 'lucide:users'},
-  {id: 'devoirs', label: 'Devoirs', icon: 'lucide:file-text'},
-  {id: 'calendrier', label: 'Calendrier', icon: 'lucide:calendar'},
-  {id: 'notes', label: 'Notes', icon: 'lucide:award'}
+  {id: 'overview', label: 'Vue d\'ensemble', icon: 'lucide:trending-up', url: '/'},
+  {id: 'classes', label: 'Classes', icon: 'lucide:users', url: '/classes'},
+  {id: 'devoirs', label: 'Devoirs', icon: 'lucide:file-text', url: '/devoirs'},
+  {id: 'calendrier', label: 'Calendrier', icon: 'lucide:calendar', url: '/calendrier'},
+  {id: 'notes', label: 'Notes', icon: 'lucide:award', url: '/notes'}
 ];
 </script>
 
@@ -16,25 +13,23 @@ const menuItems = [
   <aside
       class="fixed left-0 top-0 h-full w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 p-6">
     <div class="flex items-center gap-3 mb-8 p-4 rounded-lg">
-      <img v-if="colorMode.value === 'light'" src="/images/logo-white.svg" alt="Logo">
-      <img v-else src="/images/logo.svg" alt="Logo">
+      <UColorModeImage
+          light="/images/logo-white.svg"
+          dark="/images/logo.svg"
+      />
     </div>
 
     <nav class="space-y-2">
-      <button
+      <ULink
           v-for="item in menuItems"
           :key="item.id"
-          :class="[
-      'w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all',
-      activeTab === item.id
-        ? 'bg-blue-50 text-blue-600 font-medium dark:bg-blue-900 dark:text-blue-300'
-        : 'text-slate-600 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800'
-    ]"
-          @click="activeTab = item.id"
-      >
+          raw :to="item.url"
+          class="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all"
+          active-class="bg-blue-50 text-blue-600 font-medium dark:bg-blue-900 dark:text-blue-300"
+          inactive-class="text-slate-600 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800">
         <Icon :name="item.icon" class="w-5 h-5"/>
         <span>{{ item.label }}</span>
-      </button>
+      </ULink>
     </nav>
 
 
@@ -50,7 +45,3 @@ const menuItems = [
     </div>
   </aside>
 </template>
-
-<style scoped>
-
-</style>
