@@ -40,7 +40,7 @@
             <div class="flex items-center gap-3">
               <div class="text-right">
                 <p class="text-sm text-slate-500">Moyenne</p>
-                <p class="text-lg font-bold text-slate-900">{{ classe.moyenne }}</p>
+                <p class="text-lg font-bold text-slate-900 dark:text-white">{{ classe.moyenne }}</p>
               </div>
               <Icon name="lucide:chevron-right" class="w-5 h-5 text-slate-400"/>
             </div>
