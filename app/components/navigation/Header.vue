@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const userStore = useUserStore()
 const items = ref([
   [
     {
@@ -87,13 +88,16 @@ const items = ref([
     }
   ]
 ])
+
+const { user } = storeToRefs(userStore)
+
 </script>
 
 <template>
   <header class="mb-8">
     <div class="flex items-center justify-between mb-6">
       <div>
-        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Bienvenue, Professeur Martin</h2>
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Bienvenue, Professeur {{user.username }}</h2>
         <p class="text-slate-600 dark:text-slate-400">{{
             capitalize(new Date().toLocaleDateString('fr-FR', {
               weekday: 'long',
@@ -124,7 +128,7 @@ const items = ref([
           </UButton>
 
           <template #body>
-            <Placeholder class="h-48 m-4"/>
+            <div class="h-48 m-4"/>
           </template>
         </UModal>
         <UDropdownMenu :items="items">

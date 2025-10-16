@@ -11,9 +11,10 @@ export default defineNuxtConfig({
     debug: true,
     css: ['~/assets/css/main.css'],
     modules: [
-        '@nuxt/eslint',
-        '@nuxt/image',
-        '@nuxt/scripts',
-        '@nuxt/ui'
+      '@nuxt/eslint',
+      '@nuxt/image',
+      '@nuxt/scripts',
+      '@nuxt/ui',
+      '@pinia/nuxt',
     ],
 })
