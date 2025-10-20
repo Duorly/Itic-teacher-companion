@@ -1,5 +1,10 @@
 <template>
   <div>
+
+    <pre>
+      1:
+      {{error}}
+    </pre>
     <!-- Stats Cards -->
     <div class="grid grid-cols-4 gap-6 mb-8">
       <StatCard v-for="(stat, idx) in stats" :key="idx" :stat="stat"/>
@@ -123,8 +128,17 @@
 </template>
 
 <script setup>
+
 definePageMeta({
   layout: 'dashboard'
+})
+
+await useFetch("http://127.0.0.1:8082/api/ypareo/groups/sync", {
+
+})
+
+await useFetch("https://jsonplaceholder.typicode.com/todos/1", {
+
 })
 
 const stats = [

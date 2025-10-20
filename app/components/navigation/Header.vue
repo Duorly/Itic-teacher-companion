@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const userStore = useUserStore()
+const userStore = useAuthStore()
 const items = ref([
   [
     {

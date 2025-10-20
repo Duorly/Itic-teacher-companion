@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     },
     debug: true,
     css: ['~/assets/css/main.css'],
+    ssr: false,
     modules: [
       '@nuxt/eslint',
       '@nuxt/image',
@@ -17,4 +18,15 @@ export default defineNuxtConfig({
       '@nuxt/ui',
       '@pinia/nuxt',
     ],
+
+    runtimeConfig: {
+        // Private keys are only available on the server
+        apiSecret: '123',
+
+        // Public keys that are exposed to the client
+        public: {
+            gamingBaseUrl: process.env.NUXT_PUBLIC_GAMING_BASE_URL || 'http://localhost:8083/api/gaming',
+            authBaseUrl: process.env.NUXT_PUBLIC_AUTH_BASE_URL || 'http://localhost:8081/api/auth',
+        },
+    },
 })

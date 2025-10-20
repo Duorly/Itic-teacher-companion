@@ -1,4 +1,4 @@
-export const useUserStore = defineStore('user', () => {
+export const useAuthStore = defineStore('auth', () => {
     const count = ref(0)
 
     const loading = ref(false)
@@ -14,5 +14,26 @@ export const useUserStore = defineStore('user', () => {
         count.value++
     }
 
-    return { user, loading, login, doubleCount }
+    const register = async (payload: any) => {
+        loading.value = true
+
+        const { data, status, error } = await useAuthService("/register-teacher", {
+            method: "POST",
+            body: {
+                ypareoLogin : payload.login,
+                password : payload.password,
+                confirmPassword : payload.password
+            }
+        })
+
+        if (error.value) {
+            await Promise.reject(error.value)
+        }
+
+        loading.value = false
+
+        return data.value
+    }
+
+    return { user, loading, login, register, doubleCount }
 })
