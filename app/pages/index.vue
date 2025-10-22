@@ -1,10 +1,5 @@
 <template>
   <div>
-
-    <pre>
-      1:
-      {{error}}
-    </pre>
     <!-- Stats Cards -->
     <div class="grid grid-cols-4 gap-6 mb-8">
       <StatCard v-for="(stat, idx) in stats" :key="idx" :stat="stat"/>

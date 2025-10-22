@@ -12,10 +12,11 @@ const menuItems = [
 <template>
   <aside
       class="fixed left-0 top-0 h-full w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 p-6">
-    <div class="flex items-center gap-3 mb-8 p-4 rounded-lg">
+    <div class="flex items-center gap-3 mb-8 p-4">
       <UColorModeImage
           light="/images/logo-white.svg"
           dark="/images/logo.svg"
+          class="w-full"
       />
     </div>
 

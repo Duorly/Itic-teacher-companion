@@ -17,6 +17,7 @@ export default defineNuxtConfig({
       '@nuxt/scripts',
       '@nuxt/ui',
       '@pinia/nuxt',
+        'pinia-plugin-persistedstate/nuxt',
     ],
 
     runtimeConfig: {

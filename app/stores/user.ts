@@ -1,16 +1,15 @@
-import type {Credentials} from "~/utils/types/auth";
+import type {Credentials} from "~/utils/types/auth.type";
+import type {AuthResponse, UserInfo} from "~/utils/types/user.type";
 
 export const useAuthStore = defineStore('auth', () => {
-    const count = ref(0)
+    const token = useCookie('token')
+    const refresh_token = useCookie('refresh_token')
 
     const loading = ref(false)
 
-    const user = ref({
-        email: "",
-        username: "Chaouche"
-    })
+    const user = ref<UserInfo | null>()
 
-    const doubleCount = computed(() => count.value * 2)
+    const getAuthUser = computed(() => user.value)
 
     const register = async (payload: Credentials) => {
         loading.value = true
@@ -36,7 +35,7 @@ export const useAuthStore = defineStore('auth', () => {
     const login = async (payload : Credentials) => {
         loading.value = true
 
-        const { data, error } = await useAuthService("/login", {
+        const { data, error } = await useAuthService<AuthResponse>("/login", {
             method: "POST",
             body: {
                 ypareoLogin : payload.login,
@@ -50,8 +49,15 @@ export const useAuthStore = defineStore('auth', () => {
             await Promise.reject(error.value)
         }
 
+        user.value = data.value?.userInfo
+        token.value = data.value?.accessToken
+        refresh_token.value = data.value?.refreshToken
+
+
         return data.value
     }
 
-    return { user, loading, login, register, doubleCount }
-})
+    return { user, loading, login, register, getAuthUser }
+}, {
+    persist: true,
+},)

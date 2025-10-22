@@ -97,7 +97,7 @@ const { user } = storeToRefs(userStore)
   <header class="mb-8">
     <div class="flex items-center justify-between mb-6">
       <div>
-        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Bienvenue, Professeur {{user.username }}</h2>
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Bienvenue, Professeur {{ user?.fullName }}</h2>
         <p class="text-slate-600 dark:text-slate-400">{{
             capitalize(new Date().toLocaleDateString('fr-FR', {
               weekday: 'long',
