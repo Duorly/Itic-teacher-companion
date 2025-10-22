@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { DropdownMenuItem } from '@nuxt/ui'
+
 const userStore = useAuthStore()
-const items = ref([
+const items = ref<DropdownMenuItem[]>([
   [
     {
       label: 'Benjamin',
@@ -16,18 +18,10 @@ const items = ref([
       icon: 'i-lucide-user'
     },
     {
-      label: 'Billing',
-      icon: 'i-lucide-credit-card'
-    },
-    {
       label: 'Settings',
       icon: 'i-lucide-cog',
       kbds: [',']
     },
-    {
-      label: 'Keyboard shortcuts',
-      icon: 'i-lucide-monitor'
-    }
   ],
   [
     {
@@ -75,16 +69,19 @@ const items = ref([
       to: '/docs/components/dropdown-menu'
     },
     {
-      label: 'API',
+      label: 'YPareo',
       icon: 'i-lucide-cloud',
-      disabled: true
+      to: "https://iticparis.ymag.cloud/",
+      target: '_blank'
     }
   ],
   [
     {
-      label: 'Logout',
+      label: 'Déconnexion',
       icon: 'i-lucide-log-out',
-      kbds: ['shift', 'meta', 'q']
+      onSelect() {
+        useLogout()
+      }
     }
   ]
 ])

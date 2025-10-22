@@ -26,8 +26,9 @@ export default defineNuxtConfig({
 
         // Public keys that are exposed to the client
         public: {
-            gamingBaseUrl: process.env.NUXT_PUBLIC_GAMING_BASE_URL || 'http://localhost:8083/api/gaming',
-            authBaseUrl: process.env.NUXT_PUBLIC_AUTH_BASE_URL || 'http://localhost:8081/api/auth',
+            gamingBaseUrl: process.env.NUXT_PUBLIC_GAMING_BASE_URL,
+            authBaseUrl: process.env.NUXT_PUBLIC_AUTH_BASE_URL,
+            ypareoBaseUrl: process.env.NUXT_PUBLIC_YPAREO_BASE_URL,
         },
     },
 })
