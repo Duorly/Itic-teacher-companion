@@ -2,12 +2,15 @@
 import type { DropdownMenuItem } from '@nuxt/ui'
 
 const userStore = useAuthStore()
+
+const { user } = storeToRefs(userStore)
+
 const items = ref<DropdownMenuItem[]>([
   [
     {
-      label: 'Benjamin',
+      label: user.value?.firstName,
       avatar: {
-        src: 'https://github.com/benjamincanac.png'
+        src: 'https://img.freepik.com/premium-photo/software-engineer-digital-avatar-generative-ai_934475-8997.jpg'
       },
       type: 'label'
     }
@@ -86,8 +89,6 @@ const items = ref<DropdownMenuItem[]>([
   ]
 ])
 
-const { user } = storeToRefs(userStore)
-
 </script>
 
 <template>
@@ -95,14 +96,16 @@ const { user } = storeToRefs(userStore)
     <div class="flex items-center justify-between mb-6">
       <div>
         <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Bienvenue, Professeur {{ user?.fullName }}</h2>
-        <p class="text-slate-600 dark:text-slate-400">{{
-            capitalize(new Date().toLocaleDateString('fr-FR', {
-              weekday: 'long',
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric'
-            }))
-          }}</p>
+        <NuxtTime
+            :datetime="Date.now()"
+            weekday="long"
+            month="long"
+            day="numeric"
+            year="numeric"
+            locale="fr"
+            class="capitalize text-slate-600 dark:text-slate-400"
+        />
+
       </div>
       <div class="flex items-center gap-3">
         <UColorModeSwitch/>
@@ -129,7 +132,7 @@ const { user } = storeToRefs(userStore)
           </template>
         </UModal>
         <UDropdownMenu :items="items">
-          <UAvatar src="https://github.com/benjamincanac.png" size="lg"/>
+          <UAvatar src="https://img.freepik.com/premium-photo/software-engineer-digital-avatar-generative-ai_934475-8997.jpg" size="lg"/>
         </UDropdownMenu>
       </div>
     </div>

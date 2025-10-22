@@ -3,6 +3,8 @@ import type {Training} from "~/utils/types/training.type";
 export const useTrainingStore = defineStore('training', () => {
     const loading = ref(false)
 
+    const training = ref<Training>();
+
     const trainings = ref<Training[]>();
 
     const getTotalTrainings = computed(() => trainings.value?.length)
@@ -24,7 +26,7 @@ export const useTrainingStore = defineStore('training', () => {
         return data.value
     }
 
-    return { trainings, loading, getTeacherTraining, getTotalTrainings, getTotalStudents }
+    return { trainings, training, loading, getTeacherTraining, getTotalTrainings, getTotalStudents }
 }, {
     persist: true,
 },)
