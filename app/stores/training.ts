@@ -1,9 +1,14 @@
 import type {Training} from "~/utils/types/training.type";
+import {useAuthStore} from "~/stores/user";
 
 export const useTrainingStore = defineStore('training', () => {
+    const authStore = useAuthStore()
+
     const loading = ref(false)
 
     const training = ref<Training>();
+
+    const training_students = ref<Student[]>()
 
     const trainings = ref<Training[]>();
 
@@ -13,7 +18,9 @@ export const useTrainingStore = defineStore('training', () => {
     const getTeacherTraining = async () => {
         loading.value = true
 
-        const { data, error } = await useYpareoService<Training[]>("/groups/trainer/28558/formations")
+        const { data, error } = await useGamingService<Training[]>(
+            `trainer/${authStore.user?.ypareoId}/formations-with-classes`
+        )
 
         loading.value = false
 
@@ -21,12 +28,39 @@ export const useTrainingStore = defineStore('training', () => {
             await Promise.reject(error.value)
         }
 
+        console.log("%o", data.value)
+
         trainings.value = data.value
 
         return data.value
     }
 
-    return { trainings, training, loading, getTeacherTraining, getTotalTrainings, getTotalStudents }
+    const getTrainingById = (id : number) => {
+        training.value = trainings.value?.find(tr => tr.id === id)
+        return (id: number) => {
+            return trainings.value?.find(tr => tr.id === id)
+        }
+    }
+
+    const getTeacherStudentsByTraining = async (id: number | string) => {
+        loading.value = true
+
+        const { data, error } = await useGamingService<Student[]>(`/formations/${id}/students`)
+
+        loading.value = false
+
+        if (error.value) {
+            await Promise.reject(error.value)
+        }
+
+        console.log("%o", data.value)
+
+        training_students.value = data.value
+
+        return data.value
+    }
+
+    return { trainings, training, training_students, loading, getTeacherTraining, getTrainingById, getTeacherStudentsByTraining, getTotalTrainings, getTotalStudents }
 }, {
     persist: true,
 },)

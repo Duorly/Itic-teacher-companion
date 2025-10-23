@@ -1,11 +1,11 @@
-import type {Group} from "~/utils/types/group.type";
+import type {ClassGroup} from "~/utils/types/class_group.type";
 
 export interface Training {
-    formationId: string
-    label: string
-    shortLabel: string
+    id: number
+    displayName: string
+    totalStudents: number
     dateDebut: string
     dateFin: string
-    groups: Group[]
-    totalStudents: number
+    active: boolean,
+    classGroups: ClassGroup[]
 }

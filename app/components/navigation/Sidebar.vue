@@ -24,7 +24,7 @@ const menuItems = [
       <ULink
           v-for="item in menuItems"
           :key="item.id"
-          raw :to="item.url"
+          raw :to="item?.url"
           class="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all"
           active-class="bg-blue-50 text-blue-600 font-medium dark:bg-blue-900 dark:text-blue-300"
           inactive-class="text-slate-600 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800">

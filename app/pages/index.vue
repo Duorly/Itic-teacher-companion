@@ -11,20 +11,21 @@
           class="col-span-2 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
         <div class="flex items-center justify-between mb-6">
           <h3 class="text-xl font-bold text-slate-900 dark:text-white">Mes Classes</h3>
-          <button class="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1 cursor-pointer">
-            Voir tout
+          <UButton variant="ghost" to="/classes" class="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1 cursor-pointer">
+            Voir tout ({{trainings.length}})
             <Icon name="lucide:chevron-right" class="w-4 h-4"/>
-          </button>
+          </UButton>
         </div>
         <div class="space-y-4">
           <div
-              v-for="(classe, idx) in trainings"
-              :key="idx"
+              v-for="(classe) in trainings?.slice(0, 4)"
+              :key="classe.id"
               class="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-blue-300 hover:shadow-sm transition-all cursor-pointer"
+              @click="() => navigateTo('/classes/details/' + classe.id)"
           >
             <div class="flex items-center gap-4">
               <div :class="[classe?.couleur, 'px-3 py-2 rounded-lg font-medium text-sm bg-blue-100 text-blue-700']">
-                {{ classe.label }}
+                {{ classe.displayName }}
               </div>
               <div class="flex items-center gap-6 text-sm text-slate-600">
                   <span class="flex items-center gap-1">
