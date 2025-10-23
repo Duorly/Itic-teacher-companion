@@ -11,36 +11,37 @@
           class="col-span-2 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
         <div class="flex items-center justify-between mb-6">
           <h3 class="text-xl font-bold text-slate-900 dark:text-white">Mes Classes</h3>
-          <button class="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1 cursor-pointer">
-            Voir tout
+          <UButton variant="ghost" to="/classes" class="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1 cursor-pointer">
+            Voir tout ({{trainings.length}})
             <Icon name="lucide:chevron-right" class="w-4 h-4"/>
-          </button>
+          </UButton>
         </div>
         <div class="space-y-4">
           <div
-              v-for="(classe, idx) in classes"
-              :key="idx"
+              v-for="(classe) in trainings?.slice(0, 4)"
+              :key="classe.id"
               class="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-blue-300 hover:shadow-sm transition-all cursor-pointer"
+              @click="() => navigateTo('/classes/details/' + classe.id)"
           >
             <div class="flex items-center gap-4">
-              <div :class="[classe.couleur, 'px-3 py-2 rounded-lg font-medium text-sm']">
-                {{ classe.nom }}
+              <div :class="[classe?.couleur, 'px-3 py-2 rounded-lg font-medium text-sm bg-blue-100 text-blue-700']">
+                {{ classe.displayName }}
               </div>
               <div class="flex items-center gap-6 text-sm text-slate-600">
                   <span class="flex items-center gap-1">
                     <Icon name="lucide:users" class="w-4 h-4"/>
-                    {{ classe.eleves }} élèves
+                    {{ classe.totalStudents }} élèves
                   </span>
                 <span class="flex items-center gap-1">
                     <Icon name="lucide:file-text" class="w-4 h-4"/>
-                    {{ classe.devoirs }} devoirs
+                    {{ classe?.devoirs ?? 0 }} devoirs
                   </span>
               </div>
             </div>
             <div class="flex items-center gap-3">
               <div class="text-right">
                 <p class="text-sm text-slate-500">Moyenne</p>
-                <p class="text-lg font-bold text-slate-900 dark:text-white">{{ classe.moyenne }}</p>
+                <p class="text-lg font-bold text-slate-900 dark:text-white">{{ classe?.moyenne ?? "0,00" }}</p>
               </div>
               <Icon name="lucide:chevron-right" class="w-5 h-5 text-slate-400"/>
             </div>
@@ -109,7 +110,7 @@
               </td>
               <td class="py-4 px-4 text-slate-600 dark:text-white">{{ devoir.notes }}/28</td>
               <td class="py-4 px-4 text-right">
-                <button class="text-blue-600 hover:text-blue-700 hover:text-blue-700 font-medium text-sm">
+                <button class="text-blue-600 hover:text-blue-700 font-medium text-sm">
                   {{ devoir.statut === 'À corriger' ? 'Corriger' : 'Voir détails' }}
                 </button>
               </td>
@@ -128,27 +129,18 @@ definePageMeta({
   layout: 'dashboard'
 })
 
-await useFetch("http://127.0.0.1:8082/api/ypareo/groups/sync", {
+const trainingStore = useTrainingStore()
 
-})
+const { trainings, getTotalTrainings, getTotalStudents } = storeToRefs(trainingStore)
 
-await useFetch("https://jsonplaceholder.typicode.com/todos/1", {
+trainingStore.getTeacherTraining()
 
-})
-
-const stats = [
-  {label: 'Classes', value: '8', icon: 'lucide:users', change: '+2', color: 'bg-blue-500'},
-  {label: 'Devoirs', value: '24', icon: 'lucide:file-text', change: '+5', color: 'bg-purple-500'},
-  {label: 'Étudiants', value: '156', icon: 'lucide:book-open', change: '+12', color: 'bg-green-500'},
-  {label: 'Moyenne', value: '14.5', icon: 'lucide:award', change: '+0.3', color: 'bg-orange-500'}
-];
-
-const classes = [
-  {nom: 'Terminale S1', eleves: 28, devoirs: 5, moyenne: 15.2, couleur: 'bg-blue-100 text-blue-700'},
-  {nom: 'Première ES2', eleves: 25, devoirs: 4, moyenne: 13.8, couleur: 'bg-purple-100 text-purple-700'},
-  {nom: 'Seconde A', eleves: 30, devoirs: 6, moyenne: 14.5, couleur: 'bg-green-100 text-green-700'},
-  {nom: 'Terminale L', eleves: 22, devoirs: 3, moyenne: 14.9, couleur: 'bg-orange-100 text-orange-700'}
-];
+const stats = computed(() => [
+  {label: 'Classes', value: getTotalTrainings, icon: 'lucide:users', change: '+2', color: 'bg-blue-500'},
+  {label: 'Devoirs', value: 0, icon: 'lucide:file-text', change: '+5', color: 'bg-purple-500'},
+  {label: 'Étudiants', value: getTotalStudents, icon: 'lucide:book-open', change: '+12', color: 'bg-green-500'},
+  {label: 'Moyenne', value: 0, icon: 'lucide:award', change: '+0.3', color: 'bg-orange-500'}
+]);
 
 const devoirsRecents = [
   {titre: 'Contrôle Mathématiques', classe: 'Terminale S1', date: '15 Oct 2025', statut: 'Corrigé', notes: 28},

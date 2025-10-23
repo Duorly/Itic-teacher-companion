@@ -1,122 +1,120 @@
 <script setup lang="ts">
+import type {Training} from "~/utils/types/training.type";
+import type {TableColumn} from "#ui/components/Table.vue";
+import {UBadge, UButton} from "#components";
+
 definePageMeta({
   layout: 'dashboard'
 })
 
+const trainingStore = useTrainingStore()
+
+trainingStore.getTeacherTraining()
+
+const {trainings, loading} = storeToRefs(trainingStore)
+
+const columns: TableColumn<Training>[] = [
+  {
+    accessorKey: 'id',
+    header: '#',
+    cell: ({row}) => `#${row.getValue('id')}`
+  },
+  {
+    accessorKey: 'displayName',
+    header: 'Libellé',
+    cell: ({row}) => {
+      const displayName = row.getValue('displayName') as string
+      return h(
+          'span',
+          {
+            class: `font-semibold capitalize text-success`
+          },
+          displayName
+      )
+    }
+  },
+  {
+    accessorKey: 'totalStudents',
+    header: 'Nombre d\'élèves',
+  },
+  {
+    accessorKey: 'dateDebut',
+    header: 'Date de début',
+    cell: ({row}) => {
+      return new Date(row.getValue('dateDebut')).toLocaleString('fr-FR', {
+        day: 'numeric',
+        month: '2-digit',
+        year: 'numeric',
+      })
+    }
+  },
+  {
+    accessorKey: 'dateFin',
+    header: 'Date de fin',
+    cell: ({row}) => {
+      return new Date(row.getValue('dateFin')).toLocaleString('fr-FR', {
+        day: 'numeric',
+        month: '2-digit',
+        year: 'numeric',
+      })
+    }
+  },
+  {
+    accessorKey: 'active',
+    header: 'Actif',
+    cell: ({row}) => {
+      const color = row.getValue('active') ? ('success' as const) : ('error' as const);
+
+      return h(UBadge, {class: 'capitalize', variant: 'subtle', color}, () =>
+          row.getValue('active') ? 'OUI' : 'NON'
+      )
+    }
+  },
+  {
+    id: 'actions',
+    cell: ({row}) => {
+      return h(UButton, {
+        trailingIcon: 'i-lucide-arrow-right',
+        // arrow icon
+        color: 'primary',
+        variant: 'outline',
+        class: 'mx-auto',
+        to: `/classes/details/${row.getValue('id')}`,
+        label: 'Voir détails',
+        'aria-label': 'Actions dropdown'
+      })
+    }
+  }
+]
+
+
 const value = ref('Click to clear')
 
-const data = ref([
-  {
-    id: '4600',
-    date: '2024-03-11T15:30:00',
-    status: 'paid',
-    email: 'james.anderson@example.com',
-    amount: 594
-  },
-  {
-    id: '4599',
-    date: '2024-03-11T10:10:00',
-    status: 'failed',
-    email: 'mia.white@example.com',
-    amount: 276
-  },
-  {
-    id: '4598',
-    date: '2024-03-11T08:50:00',
-    status: 'refunded',
-    email: 'william.brown@example.com',
-    amount: 315
-  },
-  {
-    id: '4597',
-    date: '2024-03-10T19:45:00',
-    status: 'paid',
-    email: 'emma.davis@example.com',
-    amount: 529
-  },
-  {
-    id: '4596',
-    date: '2024-03-10T15:55:00',
-    status: 'paid',
-    email: 'ethan.harris@example.com',
-    amount: 639
-  },
-  {
-    id: '4600',
-    date: '2024-03-11T15:30:00',
-    status: 'paid',
-    email: 'james.anderson@example.com',
-    amount: 594
-  },
-  {
-    id: '4599',
-    date: '2024-03-11T10:10:00',
-    status: 'failed',
-    email: 'mia.white@example.com',
-    amount: 276
-  },
-  {
-    id: '4598',
-    date: '2024-03-11T08:50:00',
-    status: 'refunded',
-    email: 'william.brown@example.com',
-    amount: 315
-  },
-  {
-    id: '4597',
-    date: '2024-03-10T19:45:00',
-    status: 'paid',
-    email: 'emma.davis@example.com',
-    amount: 529
-  },
-  {
-    id: '4596',
-    date: '2024-03-10T15:55:00',
-    status: 'paid',
-    email: 'ethan.harris@example.com',
-    amount: 639
-  },
-  {
-    id: '4600',
-    date: '2024-03-11T15:30:00',
-    status: 'paid',
-    email: 'james.anderson@example.com',
-    amount: 594
-  },
-  {
-    id: '4599',
-    date: '2024-03-11T10:10:00',
-    status: 'failed',
-    email: 'mia.white@example.com',
-    amount: 276
-  },
-  {
-    id: '4598',
-    date: '2024-03-11T08:50:00',
-    status: 'refunded',
-    email: 'william.brown@example.com',
-    amount: 315
-  },
-  {
-    id: '4597',
-    date: '2024-03-10T19:45:00',
-    status: 'paid',
-    email: 'emma.davis@example.com',
-    amount: 529
-  },
-  {
-    id: '4596',
-    date: '2024-03-10T15:55:00',
-    status: 'paid',
-    email: 'ethan.harris@example.com',
-    amount: 639
-  }
-])
 </script>
 
 <template>
 
   <div>
+    <div class="border-2 border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden p-2 mb-4">
+      <UBreadcrumb
+          :items="[
+              {
+                label: 'Vue d\'ensemble',
+                icon: 'lucide:trending-up',
+                to: '/'
+              },
+              {
+                label: 'Classes',
+                icon: 'lucide:users',
+                to: '/classes'
+              },
+              {
+                label: 'Liste de toutes les classes',
+                icon: 'i-lucide-link',
+                to: '/classes'
+              }
+          ]"/>
+    </div>
     <div class="border-2 border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden p-2 mb-4">
       <UInput
           v-model="value"
@@ -136,7 +134,15 @@ const data = ref([
       </UInput>
     </div>
     <div class="border-2 border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-      <UTable sticky loading loading-color="primary" loading-animation="carousel" :data="data" class="flex-1"/>
+      <UTable
+          sticky
+          :loading="loading"
+          loading-color="primary"
+          loading-animation="carousel"
+          :columns="columns"
+          :data="trainings"
+          class="flex-1"
+      />
     </div>
 
   </div>
