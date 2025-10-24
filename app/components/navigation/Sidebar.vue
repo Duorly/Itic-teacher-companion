@@ -3,7 +3,7 @@
 const menuItems = [
   {id: 'overview', label: 'Vue d\'ensemble', icon: 'lucide:trending-up', url: '/'},
   {id: 'classes', label: 'Classes', icon: 'lucide:users', url: '/classes'},
-  {id: 'devoirs', label: 'Devoirs', icon: 'lucide:file-text', url: '/devoirs'},
+  {id: 'devoirs', label: 'Devoirs', icon: 'lucide:file-text', url: '/assignments'},
   {id: 'calendrier', label: 'Calendrier', icon: 'lucide:calendar', url: '/calendrier'},
   {id: 'notes', label: 'Notes', icon: 'lucide:award', url: '/notes'}
 ];

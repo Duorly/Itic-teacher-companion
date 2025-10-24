@@ -6,6 +6,6 @@ export function useGamingService<T>(
 ) {
     return useFetch(url, {
         ...options,
-        $fetch: useNuxtApp().$customFetch,
+        $fetch: useNuxtApp().$gamingFetch,
     })
 }

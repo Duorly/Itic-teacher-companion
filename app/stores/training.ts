@@ -1,5 +1,6 @@
 import type {Training} from "~/utils/types/training.type";
 import {useAuthStore} from "~/stores/user";
+import type {Student} from "~/utils/types/student.type";
 
 export const useTrainingStore = defineStore('training', () => {
     const authStore = useAuthStore()
