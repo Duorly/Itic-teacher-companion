@@ -4,7 +4,7 @@ const menuItems = [
   {id: 'overview', label: 'Vue d\'ensemble', icon: 'lucide:trending-up', url: '/'},
   {id: 'classes', label: 'Classes', icon: 'lucide:users', url: '/classes'},
   {id: 'devoirs', label: 'Devoirs', icon: 'lucide:file-text', url: '/assignments'},
-  {id: 'notes', label: 'Notes', icon: 'lucide:award', url: '/notes'}
+  {id: 'notes', label: 'Saisir une note', icon: 'lucide:edit', url: '/notes'}
 ];
 </script>
 
