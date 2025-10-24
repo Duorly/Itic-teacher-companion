@@ -61,15 +61,10 @@ const items = ref<DropdownMenuItem[]>([
   ],
   [
     {
-      label: 'GitHub',
-      icon: 'i-simple-icons-github',
-      to: 'https://github.com/nuxt/ui',
+      label: 'Classements',
+      icon: 'i-lucide-award',
+      to: '/ranking',
       target: '_blank'
-    },
-    {
-      label: 'Support',
-      icon: 'i-lucide-life-buoy',
-      to: '/docs/components/dropdown-menu'
     },
     {
       label: 'YPareo',
@@ -112,10 +107,6 @@ const items = ref<DropdownMenuItem[]>([
         <button
             class="p-2 flex items-center hover:bg-white dark:hover:bg-slate-800 rounded-lg transition-all border border-slate-200 dark:border-slate-700">
           <Icon name="lucide:search" class="w-5 h-5 text-slate-600 dark:text-slate-300"/>
-        </button>
-        <button
-            class="p-2 flex items-center hover:bg-white dark:hover:bg-slate-800 rounded-lg transition-all border border-slate-200 dark:border-slate-700">
-          <Icon name="lucide:filter" class="w-5 h-5 text-slate-600 dark:text-slate-300"/>
         </button>
 
         <ModalsAssignmentForm />
