@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Stats Cards -->
-    <div class="grid grid-cols-4 gap-6 mb-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
       <StatCard v-for="(stat, idx) in stats" :key="idx" :stat="stat"/>
     </div>
     <!-- Main Content Grid -->
@@ -12,7 +12,7 @@
         <div class="flex items-center justify-between mb-6">
           <h3 class="text-xl font-bold text-slate-900 dark:text-white">Mes Classes</h3>
           <UButton variant="ghost" to="/classes" class="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1 cursor-pointer">
-            Voir tout ({{trainings.length}})
+            Voir tout ({{trainings?.length ?? 0}})
             <Icon name="lucide:chevron-right" class="w-4 h-4"/>
           </UButton>
         </div>

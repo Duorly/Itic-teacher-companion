@@ -2,6 +2,9 @@ import type {Credentials} from "~/utils/types/auth.type";
 import type {AuthResponse, UserInfo} from "~/utils/types/user.type";
 
 export const useAuthStore = defineStore('auth', () => {
+
+    const {$authFetch} = useNuxtApp()
+
     const token = useCookie('token')
     const refresh_token = useCookie('refresh_token')
 
@@ -14,50 +17,49 @@ export const useAuthStore = defineStore('auth', () => {
     const register = async (payload: Credentials) => {
         loading.value = true
 
-        const { data, error } = await useAuthService("/register-teacher", {
-            method: "POST",
-            body: {
-                ypareoLogin : payload.login,
-                password : payload.password,
-                confirmPassword : payload.password_confirmation
-            }
-        })
+        try {
+            return await $authFetch<AuthResponse>("/register-teacher", {
+                method: "POST",
+                body: {
+                    ypareoLogin: payload.login,
+                    password: payload.password,
+                    confirmPassword: payload.password_confirmation
+                }
+            })
 
-        loading.value = false
-
-        if (error.value) {
-            await Promise.reject(error.value)
+        } catch (e) {
+            await Promise.reject(e)
+        } finally {
+            loading.value = false
         }
-
-        return data.value
     }
 
-    const login = async (payload : Credentials) => {
-        loading.value = true
+    const login = async (payload: Credentials) => {
 
-        const { data, error } = await useAuthService<AuthResponse>("/login", {
-            method: "POST",
-            body: {
-                ypareoLogin : payload.login,
-                password : payload.password,
-            }
-        })
+        try {
+            loading.value = true
 
-        loading.value = false
+            const data = await $authFetch<AuthResponse>("/login", {
+                method: "POST",
+                body: {
+                    ypareoLogin: payload.login,
+                    password: payload.password,
+                }
+            })
 
-        if (error.value) {
-            await Promise.reject(error.value)
+            user.value = data?.userInfo
+            token.value = data?.accessToken
+            refresh_token.value = data?.refreshToken
+
+            return data;
+        } catch (e) {
+            await Promise.reject(e)
+        } finally {
+            loading.value = false
         }
-
-        user.value = data.value?.userInfo
-        token.value = data.value?.accessToken
-        refresh_token.value = data.value?.refreshToken
-
-
-        return data.value
     }
 
-    return { user, loading, login, register, getAuthUser }
+    return {user, loading, login, register, getAuthUser}
 }, {
     persist: true,
 },)
